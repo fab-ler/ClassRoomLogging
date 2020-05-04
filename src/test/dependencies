@@ -1,0 +1,52 @@
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.8</version>
+    <scope>provided</scope>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+<dependency>
+   <groupId>org.apache.logging.log4j</groupId>
+   <artifactId>log4j-core</artifactId>
+   <version>2.12.1</version>
+</dependency>
+
+<!--Для считывания yaml-файлов -->
+<dependency>
+   <groupId>com.fasterxml.jackson.dataformat</groupId>
+   <artifactId>jackson-dataformat-yaml</artifactId>
+   <version>2.10.1</version>
+</dependency>
+
+
+Файл log4j2.yaml, который лежит в src/main/resources
+#https://springframework.guru/log4j-2-configuration-using-yaml/
+#https://logging.apache.org/log4j/2.x/manual/configuration.html
+Configuration:
+ status: INFO
+ Properties:
+   Property:
+     - name: "DefaultPattern"
+       value: "%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%t] [%c] - %msg%n"
+ Appenders:
+   Console:
+       name: consoleAppender
+       target: SYSTEM_OUT
+       PatternLayout:
+         Pattern: ${DefaultPattern}
+ Loggers:
+   logger:
+     -
+       name: consoleLogger
+       level: INFO
+       additivity: true
+       AppenderRef:
+         ref: consoleAppender
+   Root:
+     level: INFO
+     AppenderRef:
+      - ref: consoleAppender
+        level: INFO
